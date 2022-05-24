@@ -14,4 +14,12 @@ export class Acronym {
       throw new Error('Must have definition as string')
     }
   }
+
+  get title (): string {
+    return this._title
+  }
+
+  get definition (): string {
+    return this._definition
+  }
 }
