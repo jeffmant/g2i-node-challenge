@@ -4,7 +4,9 @@
   "author": "@jeffmant",
   "version": "1.0.0",
   "license": "ISC",
-  "keywords": ["node"],
+  "keywords": [
+    "node"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/jeffmant/g2i-node-challenge/issues"
   },
-  "homepage": "https://github.com/jeffmant/g2i-node-challenge"
+  "homepage": "https://github.com/jeffmant/g2i-node-challenge",
+  "devDependencies": {
+    "git-commit-msg-linter": "^4.1.3"
+  }
 }
