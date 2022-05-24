@@ -1,0 +1,19 @@
+{
+  "name": "g2i-node-challenge",
+  "description": "G2i Node Challenge",
+  "author": "@jeffmant",
+  "version": "1.0.0",
+  "license": "ISC",
+  "keywords": ["node"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffmant/g2i-node-challenge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeffmant/g2i-node-challenge/issues"
+  },
+  "homepage": "https://github.com/jeffmant/g2i-node-challenge"
+}
