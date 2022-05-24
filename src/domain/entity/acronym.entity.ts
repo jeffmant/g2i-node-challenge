@@ -6,12 +6,15 @@ export class Acronym {
     this._title = title
     this._definition = definition
 
-    if (!this._title) {
-      throw new Error('Must have title as string')
-    }
+    this.validate()
+  }
 
-    if (!this._definition) {
-      throw new Error('Must have definition as string')
+  private validate (): void {
+    const requiredFields = ['title', 'definition']
+    for (const field of requiredFields) {
+      if (!this[field]) {
+        throw new Error(`Must have ${field} as string`)
+      }
     }
   }
 
