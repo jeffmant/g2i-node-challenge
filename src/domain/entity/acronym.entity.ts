@@ -9,5 +9,9 @@ export class Acronym {
     if (!this._title) {
       throw new Error('Must have title as string')
     }
+
+    if (!this._definition) {
+      throw new Error('Must have definition as string')
+    }
   }
 }
