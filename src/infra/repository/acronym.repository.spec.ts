@@ -108,4 +108,16 @@ describe('Acronym Repository Unit Tests', () => {
       expect(error.message).toBe('Acronym not found')
     }
   })
+
+  it('Should throw when try to update an duplicated acronym definition', async () => {
+    const sut = makeSut()
+    const acronymDataToCreate = new Acronym('TDD', 'Test Driven Development')
+    const acronymDataToUpdate = new Acronym('XP', 'Test Driven Development')
+    await sut.create(acronymDataToCreate)
+    try {
+      await sut.update(acronymDataToCreate.title, acronymDataToUpdate)
+    } catch (error) {
+      expect(error.message).toBe('Acronym definition already exists')
+    }
+  })
 })
