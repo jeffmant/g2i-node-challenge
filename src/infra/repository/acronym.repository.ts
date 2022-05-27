@@ -45,4 +45,14 @@ export class AcronymRepository implements IRepository<Acronym> {
       definition: acronymData?.definition
     }, { where: { title } })
   }
+
+  async delete (title: string): Promise<void> {
+    const foundAcronym = await AcronymModel.findOne({
+      where: { title }
+    })
+
+    if (!foundAcronym) {
+      throw new Error('Acronym not found')
+    }
+  }
 }
