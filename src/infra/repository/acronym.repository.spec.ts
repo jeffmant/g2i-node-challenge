@@ -164,4 +164,20 @@ describe('Acronym Create Repository Unit Tests', () => {
     expect(paginatedAcronyms.data.length).toBe(0)
     expect(paginatedAcronyms.data).toEqual([])
   })
+
+  it('Should return a filtered acronyms list', async () => {
+    const sut = makeSut()
+    await AcronymModel.bulkCreate([
+      { title: '?', definition: 'I dont understand what you mean' },
+      { title: 'TDD', definition: 'Test Driven Development' },
+      { title: 'XP', definition: 'Extreme Programming' }
+    ])
+    const paginatedAcronyms = await sut.paginate({
+      filter: 'TeST'
+    })
+    expect(paginatedAcronyms.total).toBe(1)
+    expect(paginatedAcronyms.data.length).toBe(1)
+    expect([{ title: paginatedAcronyms.data[0].title, definition: paginatedAcronyms.data[0].definition }])
+      .toEqual([{ title: 'TDD', definition: 'Test Driven Development' }])
+  })
 })
