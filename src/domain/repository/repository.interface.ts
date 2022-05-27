@@ -2,7 +2,7 @@ export interface PaginateParams {
   orderParam?: string
   orderBy?: 'ASC' | 'DESC'
   filter?: string
-  page?: number
+  offset?: number
   pageSize?: number
 }
 
