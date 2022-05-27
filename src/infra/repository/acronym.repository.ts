@@ -10,7 +10,7 @@ export class AcronymRepository implements IRepository<Acronym> {
       throw new Error('Acronym not found')
     }
 
-    return new Acronym('', '')
+    return new Acronym(foundAcronym.title, foundAcronym.definition)
   }
 
   async create (acronymData: Acronym): Promise<void> {
