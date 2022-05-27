@@ -1,8 +1,35 @@
 import { Acronym } from '../../domain/entity/acronym.entity'
-import { IRepository } from '../../domain/repository/repository.interface'
+import { IRepository, PaginatedResult, PaginateParams } from '../../domain/repository/repository.interface'
 import { AcronymModel } from '../database/sequelize/model/acronym.model'
 import { Op } from 'sequelize'
 export class AcronymRepository implements IRepository<Acronym> {
+  async paginate (paginateParams: PaginateParams): Promise<PaginatedResult<Acronym>> {
+    const params = {
+      filter: paginateParams.filter ?? '',
+      orderParam: paginateParams.orderParam ?? 'title',
+      orderBy: paginateParams.orderBy ?? 'ASC',
+      page: paginateParams.page ?? 1,
+      pageSize: paginateParams.pageSize ?? 10
+    }
+
+    const foundAcronyms = await AcronymModel.findAndCountAll({
+      where: {
+        [Op.or]: [
+          { definition: { [Op.like]: `%${params.filter}%` } },
+          { title: { [Op.like]: `%${params.filter}%` } }
+        ]
+      },
+      offset: params.page * params.pageSize,
+      limit: params.pageSize,
+      order: [[params.orderParam, params.orderBy]]
+    })
+
+    return {
+      total: foundAcronyms.count,
+      data: foundAcronyms.rows.map(foundAcronym => new Acronym(foundAcronym.title, foundAcronym.definition))
+    }
+  }
+
   async findOneByParam (title: string): Promise<Acronym> {
     const foundAcronym = await AcronymModel.findOne({ where: { title } })
 
