@@ -52,4 +52,25 @@ describe('Acronym Repository Unit Tests', () => {
       definition: acronymEntity.definition
     })
   })
+
+  it('Should Update an Acronym', async () => {
+    const sut = new AcronymRepository()
+    const acronymDataToCreate = new Acronym('TDD', 'Test Driven Development')
+    await sut.create(acronymDataToCreate)
+
+    const createdAcronym = await AcronymModel.findOne({ where: { title: acronymDataToCreate.title } }) as AcronymModel
+
+    const acronymDataToUpdate = new Acronym('XP', 'Extreme Programming')
+    await sut.update(createdAcronym.title, acronymDataToUpdate)
+
+    const updatedAcronym = await AcronymModel.findOne({ where: { title: acronymDataToUpdate.title } }) as AcronymModel
+
+    expect({
+      title: updatedAcronym.title,
+      definition: updatedAcronym.definition
+    }).toEqual({
+      title: acronymDataToUpdate.title,
+      definition: acronymDataToUpdate.definition
+    })
+  })
 })
