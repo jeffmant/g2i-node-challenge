@@ -3,6 +3,16 @@ import { IRepository } from '../../domain/repository/repository.interface'
 import { AcronymModel } from '../database/sequelize/model/acronym.model'
 import { Op } from 'sequelize'
 export class AcronymRepository implements IRepository<Acronym> {
+  async findOneByParam (title: string): Promise<Acronym> {
+    const foundAcronym = await AcronymModel.findOne({ where: { title } })
+
+    if (!foundAcronym) {
+      throw new Error('Acronym not found')
+    }
+
+    return new Acronym('', '')
+  }
+
   async create (acronymData: Acronym): Promise<void> {
     const foundAcronym = await AcronymModel.findOne({
       where: {
