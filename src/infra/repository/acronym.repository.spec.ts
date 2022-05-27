@@ -139,4 +139,13 @@ describe('Acronym Create Repository Unit Tests', () => {
     const deletedAcronym = await AcronymModel.findOne({ where: { title: acronymDataToUpdate.title } })
     expect(deletedAcronym).toBeNull()
   })
+
+  it('Should throw when try to find a not found acronym', async () => {
+    const sut = makeSut()
+    try {
+      await sut.findOneByParam('XP')
+    } catch (error) {
+      expect(error.message).toBe('Acronym not found')
+    }
+  })
 })
