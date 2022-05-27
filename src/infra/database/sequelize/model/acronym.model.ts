@@ -8,9 +8,9 @@ export class AcronymModel extends Model {
   @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
   declare id: number
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.STRING, allowNull: false, unique: true })
   declare title: string
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.STRING, allowNull: false, unique: true })
   declare definition: string
 }

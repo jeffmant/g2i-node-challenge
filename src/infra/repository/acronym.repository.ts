@@ -32,6 +32,14 @@ export class AcronymRepository implements IRepository<Acronym> {
       throw new Error('Acronym not found')
     }
 
+    const duplicatedAcronymDefinition = await AcronymModel.findOne({
+      where: { definition: acronymData.definition }
+    })
+
+    if (duplicatedAcronymDefinition) {
+      throw new Error('Acronym definition already exists')
+    }
+
     await AcronymModel.update({
       title: acronymData?.title,
       definition: acronymData?.definition
