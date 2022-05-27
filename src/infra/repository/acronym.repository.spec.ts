@@ -98,4 +98,14 @@ describe('Acronym Repository Unit Tests', () => {
       definition: acronymDataToUpdate.definition
     })
   })
+
+  it('Should throws with not found acronym', async () => {
+    const sut = makeSut()
+    const acronymDataToUpdate = new Acronym('XP', 'Extreme Programming')
+    try {
+      await sut.update(acronymDataToUpdate.title, acronymDataToUpdate)
+    } catch (error) {
+      expect(error.message).toBe('Acronym not found')
+    }
+  })
 })
