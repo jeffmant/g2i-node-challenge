@@ -1,7 +1,12 @@
 import { Sequelize } from 'sequelize-typescript'
+import { Op } from 'sequelize'
 import { Acronym } from '../../domain/entity/acronym.entity'
 import { AcronymModel } from '../database/sequelize/model/acronym.model'
 import { AcronymRepository } from './acronym.repository'
+
+const makeSut = (): AcronymRepository => {
+  return new AcronymRepository()
+}
 
 describe('Acronym Repository Unit Tests', () => {
   let sequelize: Sequelize
@@ -38,23 +43,43 @@ describe('Acronym Repository Unit Tests', () => {
   })
 
   it('Should Create an Acronym', async () => {
-    const sut = new AcronymRepository()
-    const acronymEntity = new Acronym('TDD', 'Test-Driven Development')
-    await sut.create(acronymEntity)
+    const sut = makeSut()
+    const acronymDataToCreate = new Acronym('TDD', 'Test-Driven Development')
+    await sut.create(acronymDataToCreate)
 
-    const createdAcronym = await AcronymModel.findOne({ where: { title: acronymEntity.title } }) as AcronymModel
+    const createdAcronym = await AcronymModel.findOne({ where: { title: acronymDataToCreate.title } }) as AcronymModel
 
     expect({
       title: createdAcronym.title,
       definition: createdAcronym.definition
     }).toEqual({
-      title: acronymEntity.title,
-      definition: acronymEntity.definition
+      title: acronymDataToCreate.title,
+      definition: acronymDataToCreate.definition
     })
   })
 
+  it('Should throws with duplicated title or definition', async () => {
+    const sut = makeSut()
+    const acronymDataToCreate = new Acronym('TDD', 'Test-Driven Development')
+    await sut.create(acronymDataToCreate)
+    const createdAcronym = await AcronymModel.findOne({
+      where: {
+        [Op.or]: [
+          { title: acronymDataToCreate.title },
+          { definition: acronymDataToCreate.definition }
+        ]
+      }
+    })
+    expect(createdAcronym).toBeDefined()
+    try {
+      await sut.create(acronymDataToCreate)
+    } catch (error) {
+      expect(error.message).toBe('Acronym already exists')
+    }
+  })
+
   it('Should Update an Acronym', async () => {
-    const sut = new AcronymRepository()
+    const sut = makeSut()
     const acronymDataToCreate = new Acronym('TDD', 'Test Driven Development')
     await sut.create(acronymDataToCreate)
 
