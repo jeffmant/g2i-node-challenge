@@ -156,4 +156,12 @@ describe('Acronym Create Repository Unit Tests', () => {
     const foundAcronym = await sut.findOneByParam(acronymDataToCreate.title)
     expect(foundAcronym).toEqual(acronymDataToCreate)
   })
+
+  it('Should return a empty array when not found any acronyms', async () => {
+    const sut = makeSut()
+    const paginatedAcronyms = await sut.paginate({})
+    expect(paginatedAcronyms.total).toBe(0)
+    expect(paginatedAcronyms.data.length).toBe(0)
+    expect(paginatedAcronyms.data).toEqual([])
+  })
 })
