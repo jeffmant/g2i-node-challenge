@@ -8,7 +8,7 @@ const makeSut = (): AcronymRepository => {
   return new AcronymRepository()
 }
 
-describe('Acronym Repository Unit Tests', () => {
+describe('Acronym Create Repository Unit Tests', () => {
   let sequelize: Sequelize
 
   beforeEach(async () => {
@@ -58,7 +58,7 @@ describe('Acronym Repository Unit Tests', () => {
     })
   })
 
-  it('Should throws with duplicated title or definition', async () => {
+  it('Should throw with duplicated title or definition', async () => {
     const sut = makeSut()
     const acronymDataToCreate = new Acronym('TDD', 'Test-Driven Development')
     await sut.create(acronymDataToCreate)
@@ -99,7 +99,7 @@ describe('Acronym Repository Unit Tests', () => {
     })
   })
 
-  it('Should throws with not found acronym', async () => {
+  it('Should throw with not found acronym', async () => {
     const sut = makeSut()
     const acronymDataToUpdate = new Acronym('XP', 'Extreme Programming')
     try {
@@ -118,6 +118,16 @@ describe('Acronym Repository Unit Tests', () => {
       await sut.update(acronymDataToCreate.title, acronymDataToUpdate)
     } catch (error) {
       expect(error.message).toBe('Acronym definition already exists')
+    }
+  })
+
+  it('Should throw when try to a not found acronym', async () => {
+    const sut = makeSut()
+    const acronymDataToUpdate = new Acronym('XP', 'Extreme Programming')
+    try {
+      await sut.delete(acronymDataToUpdate.title)
+    } catch (error) {
+      expect(error.message).toBe('Acronym not found')
     }
   })
 })
