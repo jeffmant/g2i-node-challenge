@@ -3,10 +3,17 @@ import { IRepository } from '../../domain/repository/repository.interface'
 import { AcronymModel } from '../database/sequelize/model/acronym.model'
 
 export class AcronymRepository implements IRepository<Acronym> {
-  async create (entity: Acronym): Promise<void> {
+  async create (acronymData: Acronym): Promise<void> {
     await AcronymModel.create({
-      title: entity.title,
-      definition: entity.definition
+      title: acronymData.title,
+      definition: acronymData.definition
     })
+  }
+
+  async update (title: string, acronymData: Partial<Acronym>): Promise<void> {
+    await AcronymModel.update({
+      title: acronymData?.title,
+      definition: acronymData?.definition
+    }, { where: { title } })
   }
 }
