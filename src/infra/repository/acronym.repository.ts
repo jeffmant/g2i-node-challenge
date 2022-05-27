@@ -54,5 +54,7 @@ export class AcronymRepository implements IRepository<Acronym> {
     if (!foundAcronym) {
       throw new Error('Acronym not found')
     }
+
+    await AcronymModel.destroy({ where: { title } })
   }
 }
