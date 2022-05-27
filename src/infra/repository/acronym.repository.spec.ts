@@ -148,4 +148,12 @@ describe('Acronym Create Repository Unit Tests', () => {
       expect(error.message).toBe('Acronym not found')
     }
   })
+
+  it('Should find acronym by title param', async () => {
+    const sut = makeSut()
+    const acronymDataToCreate = new Acronym('TDD', 'Test Driven Development')
+    await sut.create(acronymDataToCreate)
+    const foundAcronym = await sut.findOneByParam(acronymDataToCreate.title)
+    expect(foundAcronym).toEqual(acronymDataToCreate)
+  })
 })
