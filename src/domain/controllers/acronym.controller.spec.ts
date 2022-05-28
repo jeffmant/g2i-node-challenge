@@ -123,4 +123,26 @@ describe('Acronym Controller Unit Unit Tests', () => {
       expect(error).toBeUndefined()
     }
   })
+
+  it('Should returns 200 when get a acronym by title', async () => {
+    try {
+      const newAcronym = new Acronym('TDD', 'Test Driven Development')
+      await AcronymModel.create({
+        title: newAcronym.title,
+        definition: newAcronym.definition
+      })
+
+      const response = await request(server)
+        .get(`/acronyms/${newAcronym.title}`)
+
+      expect(response.statusCode).toBe(200)
+      expect(response.body).toBeDefined()
+      expect(response.body).toEqual({
+        title: newAcronym.title,
+        definition: newAcronym.definition
+      })
+    } catch (error) {
+      expect(error).toBeUndefined()
+    }
+  })
 })
