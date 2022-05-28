@@ -74,4 +74,31 @@ describe('Acronym Controller Unit Unit Tests', () => {
       expect(error).toBeUndefined()
     }
   })
+
+  it('Should returns 200 when update a acronym', async () => {
+    try {
+      const newAcronym = new Acronym('TDD', 'Test Driven Development')
+      await AcronymModel.create({
+        title: newAcronym.title,
+        definition: newAcronym.definition
+      })
+
+      const acronymToUpdate = new Acronym('TDD', 'Test-Driven Development')
+      const response = await request(server)
+        .put(`/acronyms/${newAcronym.title}`)
+        .send({
+          definition: acronymToUpdate.definition
+        })
+
+      const updatedAcronym = await AcronymModel.findOne({ where: { title: newAcronym.title } })
+
+      expect(response.statusCode).toBe(200)
+      expect(response.body).toBeDefined()
+      expect(response.body).toEqual({ message: 'Acronym updated' })
+      expect(updatedAcronym?.title).toBe(acronymToUpdate.title)
+      expect(updatedAcronym?.definition).toBe(acronymToUpdate.definition)
+    } catch (error) {
+      expect(error).toBeUndefined()
+    }
+  })
 })
