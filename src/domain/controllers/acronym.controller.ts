@@ -58,6 +58,20 @@ class AcronymController implements IController {
       return res.status(500).json({ error: error.message })
     }
   }
+
+  async findOneByParam (req: Request, res: Response): Promise<Response> {
+    try {
+      const { title } = req.params
+      const acronym = await AcronymRepository.findOneByParam(title)
+
+      return res.status(200).json({
+        title: acronym.title,
+        definition: acronym.definition
+      })
+    } catch (error) {
+      return res.status(500).json({ error: error.message })
+    }
+  }
 }
 
 export default new AcronymController()
