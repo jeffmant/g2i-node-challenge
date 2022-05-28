@@ -13,6 +13,7 @@ class AppRouter {
   acronymRoutes (): void {
     this.router.get('/acronyms', AcronymController.paginate)
     this.router.post('/acronyms', AcronymController.create)
+    this.router.put('/acronyms/:title', AcronymController.update)
   }
 }
 
