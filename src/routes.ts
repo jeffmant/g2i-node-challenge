@@ -14,6 +14,7 @@ class AppRouter {
     this.router.get('/acronyms', AcronymController.paginate)
     this.router.post('/acronyms', AcronymController.create)
     this.router.put('/acronyms/:title', AcronymController.update)
+    this.router.delete('/acronyms/:title', AcronymController.delete)
   }
 }
 

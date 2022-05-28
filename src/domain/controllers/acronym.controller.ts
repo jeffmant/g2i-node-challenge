@@ -46,6 +46,18 @@ class AcronymController implements IController {
       return res.status(500).json({ error: error.message })
     }
   }
+
+  async delete (req: Request, res: Response): Promise<Response> {
+    try {
+      const { title } = req.params
+
+      await AcronymRepository.delete(title)
+
+      return res.status(200).json({ message: 'Acronym deleted' })
+    } catch (error) {
+      return res.status(500).json({ error: error.message })
+    }
+  }
 }
 
 export default new AcronymController()
