@@ -8,6 +8,9 @@
     "node"
   ],
   "scripts": {
+    "start": "node dist/src/server.js",
+    "prestart": "yarn build",
+    "build": "tsc",
     "test": "jest --passWithNoTests --runInBand --detectOpenHandles",
     "test:watch": "yarn test --watchAll ",
     "test:staged": "yarn test",
