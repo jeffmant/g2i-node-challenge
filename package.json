@@ -8,9 +8,9 @@
     "node"
   ],
   "scripts": {
-    "test": "jest --passWithNoTests",
-    "test:watch": "jest --watchAll",
-    "test:staged": "jest --passWithNoTests",
+    "test": "jest --passWithNoTests --runInBand --detectOpenHandles",
+    "test:watch": "yarn test --watchAll ",
+    "test:staged": "yarn test",
     "prepare": "husky install"
   },
   "repository": {
