@@ -1,9 +1,9 @@
 import { Acronym } from '../../domain/entity/acronym.entity'
-import { IRepository, PaginatedResult, PaginateParams } from '../../domain/repository/repository.interface'
-import { AcronymModel } from '../database/sequelize/model/acronym.model'
+import { IRepository, PaginatedResult, PaginateParams } from '../../domain/protocols/repository.interface'
+import { AcronymModel } from '../database/sequelize/models/acronym.model'
 import { Op } from 'sequelize'
 import { Sequelize } from 'sequelize-typescript'
-export class AcronymRepository implements IRepository<Acronym> {
+class AcronymRepository implements IRepository<Acronym> {
   async paginate (paginateParams: PaginateParams): Promise<PaginatedResult<Acronym>> {
     const params = {
       filter: paginateParams.filter ?? '',
@@ -96,3 +96,5 @@ export class AcronymRepository implements IRepository<Acronym> {
     await AcronymModel.destroy({ where: { title } })
   }
 }
+
+export default new AcronymRepository()

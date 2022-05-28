@@ -1,11 +1,12 @@
 import { Sequelize } from 'sequelize-typescript'
 import { Op } from 'sequelize'
 import { Acronym } from '../../domain/entity/acronym.entity'
-import { AcronymModel } from '../database/sequelize/model/acronym.model'
-import { AcronymRepository } from './acronym.repository'
+import { AcronymModel } from '../database/sequelize/models/acronym.model'
+import AcronymRepository from './acronym.repository'
+import { IRepository } from '../../domain/protocols/repository.interface'
 
-const makeSut = (): AcronymRepository => {
-  return new AcronymRepository()
+const makeSut = (): IRepository<Acronym> => {
+  return AcronymRepository
 }
 
 describe('Acronym Create Repository Unit Tests', () => {
