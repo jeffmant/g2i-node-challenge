@@ -19,7 +19,13 @@ class AcronymRepository implements IRepository<Acronym> {
 
     return {
       total: foundAcronyms.count,
-      data: foundAcronyms.rows.map(foundAcronym => new Acronym(foundAcronym.title, foundAcronym.definition))
+      data: foundAcronyms.rows.map(foundAcronym =>
+        new Acronym(
+          foundAcronym.title,
+          foundAcronym.definition,
+          foundAcronym.id
+        )
+      )
     }
   }
 
@@ -30,7 +36,7 @@ class AcronymRepository implements IRepository<Acronym> {
       throw new Error('Acronym not found')
     }
 
-    return new Acronym(foundAcronym.title, foundAcronym.definition)
+    return new Acronym(foundAcronym.title, foundAcronym.definition, foundAcronym.id)
   }
 
   async create (acronymData: Acronym): Promise<void> {

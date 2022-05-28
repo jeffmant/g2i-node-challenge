@@ -17,7 +17,29 @@ class AcronymController implements IController {
     try {
       const paginatedAcronyms = await AcronymRepository.paginate(params as PaginateParams)
 
-      return res.status(200).json(paginatedAcronyms)
+      return res.status(200).json({
+        total: paginatedAcronyms.total,
+        data: paginatedAcronyms.data.map(acronym => ({
+          id: acronym.id,
+          title: acronym.title,
+          definition: acronym.definition
+        }))
+      })
+    } catch (error) {
+      return res.status(500).json({ error: error.message })
+    }
+  }
+
+  async findOneByParam (req: Request, res: Response): Promise<Response> {
+    try {
+      const { title } = req.params
+      const acronym = await AcronymRepository.findOneByParam(title)
+
+      return res.status(200).json({
+        id: acronym.id,
+        title: acronym.title,
+        definition: acronym.definition
+      })
     } catch (error) {
       return res.status(500).json({ error: error.message })
     }
@@ -54,20 +76,6 @@ class AcronymController implements IController {
       await AcronymRepository.delete(title)
 
       return res.status(200).json({ message: 'Acronym deleted' })
-    } catch (error) {
-      return res.status(500).json({ error: error.message })
-    }
-  }
-
-  async findOneByParam (req: Request, res: Response): Promise<Response> {
-    try {
-      const { title } = req.params
-      const acronym = await AcronymRepository.findOneByParam(title)
-
-      return res.status(200).json({
-        title: acronym.title,
-        definition: acronym.definition
-      })
     } catch (error) {
       return res.status(500).json({ error: error.message })
     }
