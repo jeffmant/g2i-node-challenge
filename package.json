@@ -11,7 +11,7 @@
     "start": "node dist/src/server.js",
     "prestart": "yarn build",
     "build": "tsc",
-    "test": "jest --passWithNoTests --runInBand --detectOpenHandles",
+    "test": "jest --coverage --passWithNoTests --runInBand --detectOpenHandles --forceExit",
     "test:watch": "yarn test --watchAll ",
     "test:staged": "yarn test",
     "prepare": "husky install"

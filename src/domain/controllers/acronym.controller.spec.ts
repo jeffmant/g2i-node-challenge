@@ -89,6 +89,7 @@ describe('Acronym Controller Unit Unit Tests', () => {
         .send({
           definition: acronymToUpdate.definition
         })
+        .set('Authorization', `Basic ${process.env.ACCESS_TOKEN ?? ''}`)
 
       const updatedAcronym = await AcronymModel.findOne({ where: { title: newAcronym.title } })
 
@@ -112,6 +113,7 @@ describe('Acronym Controller Unit Unit Tests', () => {
 
       const response = await request(server)
         .delete(`/acronyms/${newAcronym.title}`)
+        .set('Authorization', `Basic ${process.env.ACCESS_TOKEN ?? ''}`)
 
       const deletedAcronym = await AcronymModel.findOne({ where: { title: newAcronym.title } })
 
@@ -137,10 +139,8 @@ describe('Acronym Controller Unit Unit Tests', () => {
 
       expect(response.statusCode).toBe(200)
       expect(response.body).toBeDefined()
-      expect(response.body).toEqual({
-        title: newAcronym.title,
-        definition: newAcronym.definition
-      })
+      expect(response.body.title).toBe(newAcronym.title)
+      expect(response.body.definition).toBe(newAcronym.definition)
     } catch (error) {
       expect(error).toBeUndefined()
     }

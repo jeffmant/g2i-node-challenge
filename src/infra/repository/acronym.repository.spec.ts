@@ -10,8 +10,8 @@ const makeSut = (): IRepository<Acronym> => {
 }
 
 describe('Acronym Create Repository Unit Tests', () => {
-  let sequelize: Sequelize
   let params: PaginateParams
+  let sequelize: Sequelize
 
   beforeEach(async () => {
     params = {
@@ -164,7 +164,8 @@ describe('Acronym Create Repository Unit Tests', () => {
     const acronymDataToCreate = new Acronym('TDD', 'Test Driven Development')
     await sut.create(acronymDataToCreate)
     const foundAcronym = await sut.findOneByParam(acronymDataToCreate.title)
-    expect(foundAcronym).toEqual(acronymDataToCreate)
+    expect(foundAcronym.title).toEqual(acronymDataToCreate.title)
+    expect(foundAcronym.definition).toEqual(acronymDataToCreate.definition)
   })
 
   it('Should return a empty array when not found any acronyms', async () => {
