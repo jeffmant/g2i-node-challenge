@@ -2,7 +2,9 @@ import express, { Application, json } from 'express'
 import cors from 'cors'
 import appRoutes from './routes'
 import sequelize from './infra/database/sequelize/models'
+import dotenv from 'dotenv'
 
+dotenv.config()
 export class App {
   public app: Application
 

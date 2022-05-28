@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript'
-import config from '../config.json'
+import config from '../config'
 import { AcronymModel } from './acronym.model'
 import acronymSeeds from '../acronym.json'
 
