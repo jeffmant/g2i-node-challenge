@@ -1,8 +1,10 @@
 export class Acronym {
+  private readonly _id?: number
   private readonly _title: string
   private readonly _definition: string
 
-  constructor (title: string, definition: string) {
+  constructor (title: string, definition: string, id?: number) {
+    this._id = id
     this._title = title
     this._definition = definition
 
@@ -16,6 +18,10 @@ export class Acronym {
         throw new Error(`Must have ${field} as string`)
       }
     }
+  }
+
+  get id (): number {
+    return this._id ?? 0
   }
 
   get title (): string {
