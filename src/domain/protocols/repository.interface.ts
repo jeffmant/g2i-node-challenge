@@ -1,9 +1,9 @@
 export interface PaginateParams {
-  orderParam: string
+  order: string
   orderBy: 'ASC' | 'DESC'
-  filter: string
-  offset: number
-  pageSize: number
+  search: string
+  from: number
+  limit: number
 }
 
 export interface PaginatedResult<T> {

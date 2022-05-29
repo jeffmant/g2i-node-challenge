@@ -15,11 +15,11 @@ describe('Acronym Create Repository Unit Tests', () => {
 
   beforeEach(async () => {
     params = {
-      filter: '',
-      orderParam: 'title',
+      search: '',
+      order: 'title',
       orderBy: 'ASC',
-      offset: 0,
-      pageSize: 10
+      from: 0,
+      limit: 10
     }
 
     sequelize = new Sequelize({
@@ -185,7 +185,7 @@ describe('Acronym Create Repository Unit Tests', () => {
     ])
     const paginatedAcronyms = await sut.paginate({
       ...params,
-      filter: 'TeST'
+      search: 'TeST'
     })
     expect(paginatedAcronyms.total).toBe(1)
     expect(paginatedAcronyms.data.length).toBe(1)

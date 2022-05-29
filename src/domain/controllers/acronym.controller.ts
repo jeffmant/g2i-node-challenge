@@ -6,13 +6,13 @@ import { PaginateParams } from '../protocols/repository.interface'
 
 class AcronymController implements IController {
   async paginate (req: Request, res: Response): Promise<Response> {
-    const { filter = '', orderParam = 'title', orderBy = 'ASC', offset = 0, pageSize = 10 } = req.query
+    const { search = '', order = 'title', orderBy = 'ASC', from = 0, limit = 10 } = req.query
     const params = {
-      filter,
-      orderParam,
+      search,
+      order,
       orderBy,
-      offset,
-      pageSize
+      from,
+      limit
     }
     try {
       const paginatedAcronyms = await AcronymRepository.paginate(params as PaginateParams)
