@@ -59,6 +59,10 @@ The hashTokenString is on .env file and will be used to guard PUT and DELETE rou
   `limit=[integer]`
 
   `search=[string]`
+  
+  `order=[string]`
+  
+  `orderBy=[ASC | DESC]`
 
 * **Body**
 
