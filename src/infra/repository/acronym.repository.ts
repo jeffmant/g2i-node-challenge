@@ -9,12 +9,12 @@ class AcronymRepository implements IRepository<Acronym> {
       where: Sequelize.where(
         Sequelize.fn('lower', Sequelize.col('definition')),
         {
-          [Op.like]: `%${params.filter.toLowerCase()}%`
+          [Op.like]: `%${params.search.toLowerCase()}%`
         }
       ),
-      offset: params.offset * params.pageSize,
-      limit: params.pageSize,
-      order: [[params.orderParam, params.orderBy]]
+      offset: params.from,
+      limit: params.limit,
+      order: [[params.order, params.orderBy]]
     })
 
     return {

@@ -13,11 +13,11 @@ describe('Acronym Controller Unit Unit Tests', () => {
 
   beforeEach(async () => {
     params = {
-      filter: '',
-      orderParam: 'title',
+      search: '',
+      order: 'title',
       orderBy: 'ASC',
-      offset: 0,
-      pageSize: 10
+      from: 0,
+      limit: 10
     }
 
     sequelize = new Sequelize({
