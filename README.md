@@ -60,3 +60,48 @@ The hashTokenString is on .env file and will be used to guard PUT and DELETE rou
 
   * **Code:** 500
   * **Content:** Server Error
+
+---
+
+## Get One
+
+Returns the first found element that have the title provided in the params.
+
+* **URL**
+
+  /acronyms/:title
+
+* **Method:**
+
+  `GET`
+  
+* **URL Params**
+
+    `title=[string]`
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200
+  * **Content:**
+
+    ```json
+    { 
+      "id": 1, 
+      "title": "TDD", 
+      "definition": "Test-Driven Developent"
+    }
+    ```
+
+* **Error Response:**
+
+  * **Code:** 500
+  * **Content:** Server Error
+  
+  OR
+  
+  * **Code:** 404
+  * **Content:** Not Found
