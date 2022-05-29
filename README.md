@@ -152,7 +152,7 @@ Returns a message indicating the success on create a new one.
 
 ## Update
 
-Returns a message indicating the success on update a acronym.
+Returns a message indicating the success on update an acronym.
 
 * **URL**
 
@@ -198,3 +198,42 @@ Returns a message indicating the success on update a acronym.
   
   * **Code:** 400
   * **Content:** Bad Request
+
+## Delete
+
+Returns a message indicating the success on delete an acronym.
+
+* **URL**
+
+  /acronyms/:title
+
+* **Method:**
+
+  `DELETE`
+
+* **Header Params**
+
+  `Authentication: Basic <hashTokenString>`
+  
+* **Query String**
+
+  None
+
+* **Body**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200
+  * **Content:** Acronym deleted
+
+* **Error Response:**
+
+  * **Code:** 500
+  * **Content:** Server Error
+  
+  OR
+  
+  * **Code:** 404
+  * **Content:** Not Found
