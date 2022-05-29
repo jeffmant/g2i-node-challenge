@@ -6,7 +6,33 @@ Challenge documentation: [G2i Node Challenge](https://public.3.basecamp.com/p/b7
 
 ---
 
-## Authentication
+## Collaboration
+
+### Collaboration using container
+
+Just:
+
+`docker-compose up`
+
+### Commands
+
+**build**
+
+`yarn build`
+
+**test**
+
+`yarn test`
+
+**start**
+
+`yarn start`
+
+---
+
+## API Documentation
+
+### Authentication
 
 I choose to use Basic Authentication with a static hash MD5 as token. So, we need to set in the headers `Authentication: Basic hashTokenString`
 
@@ -14,7 +40,7 @@ The hashTokenString is on .env file and will be used to guard PUT and DELETE rou
 
 ---
 
-## Get Many
+### Get Many
 
   Returns a header with total acronyms found with sent filter, and an array called **data** with a quantity of acronyms based on limit query param.
 
@@ -63,7 +89,7 @@ The hashTokenString is on .env file and will be used to guard PUT and DELETE rou
 
 ---
 
-## Get One
+### Get One
 
 Returns the first found element that have the title provided in the params.
 
@@ -108,7 +134,7 @@ Returns the first found element that have the title provided in the params.
 
 ---
 
-## Create
+### Create
 
 Returns a message indicating the success on create a new one.
 
@@ -150,7 +176,7 @@ Returns a message indicating the success on create a new one.
 
 ---
 
-## Update
+### Update
 
 Returns a message indicating the success on update an acronym.
 
@@ -199,7 +225,7 @@ Returns a message indicating the success on update an acronym.
   * **Code:** 400
   * **Content:** Bad Request
 
-## Delete
+### Delete
 
 Returns a message indicating the success on delete an acronym.
 
