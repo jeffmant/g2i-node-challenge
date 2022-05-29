@@ -26,17 +26,17 @@ The hashTokenString is on .env file and will be used to guard PUT and DELETE rou
 
   `GET`
   
-* **URL Params**
-
-    None
-
-* **Data Params**
+* **Query String**
 
   `from=[integer]`
 
   `limit=[integer]`
 
   `search=[string]`
+
+* **Body**
+
+  None
 
 * **Success Response:**
 
@@ -75,11 +75,11 @@ Returns the first found element that have the title provided in the params.
 
   `GET`
   
-* **URL Params**
+* **Query String**
 
-    `title=[string]`
+  None
 
-* **Data Params**
+* **Body**
 
   None
 
@@ -105,3 +105,46 @@ Returns the first found element that have the title provided in the params.
   
   * **Code:** 404
   * **Content:** Not Found
+
+---
+
+## Create
+
+Returns a message indicating the success on create a new one.
+
+* **URL**
+
+  /acronyms
+
+* **Method:**
+
+  `POST`
+  
+* **Query String**
+
+  None
+
+* **Body**
+
+  ```javascript
+  {
+    "title": "TDD",
+    "definition": "Test-Driven Development"
+  }
+  ```
+
+* **Success Response:**
+
+  * **Code:** 201
+  * **Content:** Acronym created
+
+* **Error Response:**
+
+  * **Code:** 500
+  * **Content:** Server Error
+  
+  OR
+  
+  * **Code:** 400
+  * **Content:** Bad Request
+  
