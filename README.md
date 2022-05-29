@@ -147,4 +147,54 @@ Returns a message indicating the success on create a new one.
   
   * **Code:** 400
   * **Content:** Bad Request
+
+---
+
+## Update
+
+Returns a message indicating the success on update a acronym.
+
+* **URL**
+
+  /acronyms/:title
+
+* **Method:**
+
+  `PUT`
+
+* **Header Params**
+
+  `Authentication: Basic <hashTokenString>`
   
+* **Query String**
+
+  None
+
+* **Body**
+
+  ```javascript
+  {
+    "title": "TDD",
+    "definition": "Test-Driven Development"
+  }
+  ```
+
+* **Success Response:**
+
+  * **Code:** 200
+  * **Content:** Acronym updated
+
+* **Error Response:**
+
+  * **Code:** 500
+  * **Content:** Server Error
+  
+  OR
+  
+  * **Code:** 404
+  * **Content:** Not Found
+  
+  OR
+  
+  * **Code:** 400
+  * **Content:** Bad Request
